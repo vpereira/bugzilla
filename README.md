@@ -1,5 +1,11 @@
 # Bugzilla
 
+[![Build
+Status](https://travis-ci.org/vpereira/bugzilla.svg?branch=master)](https://travis-ci.org/vpereira/bugzilla)
+[![Maintainability](https://api.codeclimate.com/v1/badges/36383c479e2c8a9e8182/maintainability)](https://codeclimate.com/github/vpereira/bugzilla/maintainability)
+[![Test
+Coverage](https://api.codeclimate.com/v1/badges/36383c479e2c8a9e8182/test_coverage)](https://codeclimate.com/github/vpereira/bugzilla/test_coverage)
+
 A revamp from the ruby-bugzilla. Code refactoring and added specs are the main
 differences. The bzconsole app, was moved as well for its own gem, named ```bzconsole```
 
