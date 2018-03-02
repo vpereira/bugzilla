@@ -1,0 +1,17 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=ab2b5f93f8af6c157c5262a9b25b1b8a35be1af61e83da0310e8a5f99d34910e
+language: ruby
+rvm:
+  - 2.4.0
+before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libxml2-dev libmagickcore-dev libmagickwand-dev
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - bundle exec rake spec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
