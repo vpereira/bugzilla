@@ -34,7 +34,7 @@ module Bugzilla
         conf = {}
       end
       conf.each do |_k, v|
-        load(v[:Plugin]) if v.is_a?(Hash) && v.include?(:Plugin)
+        load(File.join(File.dirname(__FILE__),v[:Plugin])) if v.is_a?(Hash) && v.include?(:Plugin)
       end
       conf
     end # def read_config
