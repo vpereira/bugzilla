@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Bugzilla::Bugzilla do
@@ -24,7 +26,7 @@ describe Bugzilla::Bugzilla do
               'Connection' => 'keep-alive',
               'Content-Length' => '145',
               'Content-Type' => 'text/xml; charset=utf-8',
-              'User-Agent' => 'XMLRPC::Client (Ruby 2.4.0)'
+              'User-Agent' => 'XMLRPC::Client (Ruby 2.6.5)'
             }
           )
           .to_return(status: 200, body: '<?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>version</name><value><string>4.3.0</string></value></member></struct></value></param></params></methodResponse>', headers: {})
@@ -53,7 +55,7 @@ describe Bugzilla::Bugzilla do
               'Connection' => 'keep-alive',
               'Content-Length' => '145',
               'Content-Type' => 'text/xml; charset=utf-8',
-              'User-Agent' => 'XMLRPC::Client (Ruby 2.4.0)'
+              'User-Agent' => 'XMLRPC::Client (Ruby 2.6.5)'
             }
           )
           .to_return(status: 200, body: '<?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>version</name><value><string>4.3.0</string></value></member></struct></value></param></params></methodResponse>', headers: {})
@@ -76,7 +78,7 @@ describe Bugzilla::Bugzilla do
               'Connection' => 'keep-alive',
               'Content-Length' => '145',
               'Content-Type' => 'text/xml; charset=utf-8',
-              'User-Agent' => 'XMLRPC::Client (Ruby 2.4.0)'
+              'User-Agent' => 'XMLRPC::Client (Ruby 2.6.5)'
             }
           )
           .to_return(status: 200, body: '<?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>version</name><value><string>4.4.12</string></value></member></struct></value></param></params></methodResponse>', headers: {})

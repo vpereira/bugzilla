@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # api_template.rb
 # Copyright (C) 2010-2012 Red Hat, Inc.
 #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # classification.rb
 # Copyright (C) 2010-2012 Red Hat, Inc.
 #
@@ -20,33 +22,29 @@
 require 'bugzilla/api_template'
 
 module Bugzilla
-
-=begin rdoc
-
-=== Bugzilla::Classification
-
-Bugzilla::Classification class is to access
-the Bugzilla::WebService::Classification API that allows you
-to deal with the available Classifications.
-
-=end
+  # rdoc
+  #
+  # === Bugzilla::Classification
+  #
+  # Bugzilla::Classification class is to access
+  # the Bugzilla::WebService::Classification API that allows you
+  # to deal with the available Classifications.
+  #
 
   class Classification < APITemplate
-
-=begin rdoc
-
-==== Bugzilla::Classification#get(params)
-
-Raw Bugzilla API to obtain the information about a set of
-classifications.
-
-See http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Classification.html
-
-=end
+    # rdoc
+    #
+    # ==== Bugzilla::Classification#get(params)
+    #
+    # Raw Bugzilla API to obtain the information about a set of
+    # classifications.
+    #
+    # See http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Classification.html
+    #
 
     protected
 
-    def _get(cmd, args)
+    def _get(cmd, _args)
       requires_version(cmd, 4.4)
 
       params = {}
@@ -54,17 +52,20 @@ See http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Classificat
       # this whole block looks confuse
       case ids
       when Hash
-        raise ArgumentError, sprintf("Invalid parameter: %s", ids.inspect) unless ids.include?('ids') || ids.include?('names')
+        unless ids.include?('ids') || ids.include?('names')
+          raise ArgumentError, format('Invalid parameter: %s', ids.inspect)
+        end
+
         params[:ids] = ids['ids'] || ids['names']
       when Array
-        r = ids.map {|x| x.kind_of?(Integer) ? x : nil}.compact
+        r = ids.map { |x| x.is_a?(Integer) ? x : nil }.compact
         if r.length != ids.length
           params[:names] = ids
         else
           params[:ids] = ids
         end
       when Integer # XXX: different than others, we dont support String here?
-          params[:ids] = [ids]
+        params[:ids] = [ids]
       else
         params[:names] = [ids]
       end

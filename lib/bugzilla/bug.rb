@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # bug.rb
 # Copyright (C) 2010-2012 Red Hat, Inc.
 #
@@ -61,18 +63,19 @@ module Bugzilla
       params = {}
 
       params['ids'] = case bugs
-      when Array
-        bugs
-      when Integer || String
-        [bugs]
-      else
-        raise ArgumentError, format('Unknown type of arguments: %s', bugs.class)
+                      when Array
+                        bugs
+                      when Integer || String
+                        [bugs]
+                      else
+                        raise ArgumentError, format('Unknown type of arguments: %s', bugs.class)
       end
 
       unless fields.nil?
         unless (fields - FIELDS_ALL).empty?
           raise ArgumentError, format('Invalid fields: %s', (FIELDS_ALL - fields).join(' '))
         end
+
         params['include_fields'] = fields
       end
 
@@ -82,6 +85,7 @@ module Bugzilla
         get_comments(bugs).each do |id, c|
           result['bugs'].each do |r|
             next unless r['id'].to_s == id.to_s
+
             r['comments'] = c['comments']
             r['comments'] = [] if r['comments'].nil?
             break
@@ -100,18 +104,17 @@ module Bugzilla
     #
 
     def get_comments(bugs)
-
       params = {}
 
       # TODO
       # this construction should be refactored to a method
       params['ids'] = case bugs
-      when Array
-        bugs
-      when Integer || String
-        [bugs]
-      else
-        raise ArgumentError, format('Unknown type of arguments: %s', bugs.class)
+                      when Array
+                        bugs
+                      when Integer || String
+                        [bugs]
+                      else
+                        raise ArgumentError, format('Unknown type of arguments: %s', bugs.class)
       end
 
       result = comments(params)
@@ -312,7 +315,9 @@ module Bugzilla
       res = check_version('3.0.4')
       required_fields.push(*defaulted_fields) unless res[0]
       required_fields.each do |f|
-        raise ArgumentError, format("Required fields isn't given: %s", f) unless args[0].include?(f)
+        unless args[0].include?(f)
+          raise ArgumentError, format("Required fields isn't given: %s", f)
+        end
       end
       res = check_version(4.0)
       if res[0]
@@ -321,8 +326,12 @@ module Bugzilla
           args[0].delete('commentprivacy')
         end
       else
-        raise ArgumentError, "groups field isn't available in this bugzilla" if args[0].include?('groups')
-        raise ArgumentError, "comment_is_private field isn't available in this bugzilla" if args[0].include?('comment_is_private')
+        if args[0].include?('groups')
+          raise ArgumentError, "groups field isn't available in this bugzilla"
+        end
+        if args[0].include?('comment_is_private')
+          raise ArgumentError, "comment_is_private field isn't available in this bugzilla"
+        end
       end
 
       @iface.call(cmd, args[0])

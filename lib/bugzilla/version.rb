@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # version.rb
 # Copyright (C) 2010-2015 Red Hat, Inc.
 #
@@ -23,5 +25,5 @@
 #
 
 module Bugzilla
-  VERSION = '0.10.0'.freeze
+  VERSION = '0.10.0'
 end # module Bugzilla

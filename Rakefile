@@ -1,5 +1,7 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
+# frozen_string_literal: true
+
+require 'bundler/gem_tasks'
+require 'rake/testtask'
 
 Bundler::GemHelper.install_tasks
 
@@ -17,10 +19,9 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-desc "Open an irb session preloaded with ruby-bugzilla"
+desc 'Open an irb session preloaded with ruby-bugzilla'
 task :console do
-  sh "irb -rubygems -I lib -r bugzilla.rb"
+  sh 'irb -rubygems -I lib -r bugzilla.rb'
 end
 
 task default: :spec
-

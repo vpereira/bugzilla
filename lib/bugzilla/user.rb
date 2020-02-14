@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # user.rb
 # Copyright (C) 2010-2014 Red Hat, Inc.
 #

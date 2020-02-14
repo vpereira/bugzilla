@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # plugin.rb
 # Copyright (C) 2010-2012 Red Hat, Inc.
 #
@@ -46,6 +48,7 @@ module Bugzilla
         @@plugins.each do |k|
           i = k.new
           next unless i.hostname == host || host.nil?
+
           case hook
           when :parser
             i.parserhook(*args)

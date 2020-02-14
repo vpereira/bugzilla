@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bugzilla
   module Utils
     def get_proxy(info)
@@ -23,18 +25,21 @@ module Bugzilla
                                 http_basic_auth_pass: uri.password, debug: opts[:debug])
       [xmlrpc, host]
     end
+
     def read_config(opts)
       fname = opts[:config].nil? ? @defaultyamlfile : opts[:config]
       begin
         # TODO: fix config file
         # Psych doesnt allow Symbol as class
         # conf = YAML.safe_load(File.open(fname).read)
-        conf = YAML.load(File.open(fname).read)
+        conf = YAML.safe_load(File.open(fname).read, [Symbol])
       rescue Errno::ENOENT
         conf = {}
       end
       conf.each do |_k, v|
-        load(File.join(File.dirname(__FILE__),v[:Plugin])) if v.is_a?(Hash) && v.include?(:Plugin)
+        if v.is_a?(Hash) && v.include?(:Plugin)
+          load(File.join(File.dirname(__FILE__), v[:Plugin]))
+        end
       end
       conf
     end # def read_config

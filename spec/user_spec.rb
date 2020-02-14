@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Bugzilla::User do
@@ -22,7 +24,7 @@ describe Bugzilla::User do
               'Connection' => 'keep-alive',
               'Content-Length' => '145',
               'Content-Type' => 'text/xml; charset=utf-8',
-              'User-Agent' => 'XMLRPC::Client (Ruby 2.4.0)'
+              'User-Agent' => 'XMLRPC::Client (Ruby 2.6.5)'
             }
           )
           .to_return(status: 200, body: '<?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>version</name><value><string>4.5.0</string></value></member></struct></value></param></params></methodResponse>', headers: {})
@@ -34,7 +36,7 @@ describe Bugzilla::User do
     describe :authentication_method do
       context 'working with tokens' do
         before do
-          @u.stub(:is_token_supported?).and_return(:true)
+          allow(@u).to receive(:is_token_supported?).and_return(:true)
         end
         it 'should return token and the filepath for the storage' do
           r = @u.send(:authentication_method)

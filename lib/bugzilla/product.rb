@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # product.rb
 # Copyright (C) 2010-2012 Red Hat, Inc.
 #
@@ -146,7 +148,10 @@ module Bugzilla
       params = {}
 
       if ids.is_a?(Hash)
-        raise ArgumentError, format('Invalid parameter: %s', ids.inspect) unless ids.include?('ids') || ids.include?('names')
+        unless ids.include?('ids') || ids.include?('names')
+          raise ArgumentError, format('Invalid parameter: %s', ids.inspect)
+        end
+
         params[:ids] = ids['ids'] || ids['names']
       elsif ids.is_a?(Array)
         r = ids.map { |x| x.is_a?(Integer) ? x : nil }.compact

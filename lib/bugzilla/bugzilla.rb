@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # bugzilla.rb
 # Copyright (C) 2010-2014 Red Hat, Inc.
 #
@@ -59,7 +61,9 @@ module Bugzilla
 
     def requires_version(cmd, version_)
       v = check_version(version_)
-      raise NoMethodError, format('%s is not supported in Bugzilla %s', cmd, v[1]) unless v[0]
+      unless v[0]
+        raise NoMethodError, format('%s is not supported in Bugzilla %s', cmd, v[1])
+      end
     end # def requires_version
 
     # rdoc

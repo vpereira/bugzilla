@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # nvbugzilla.rb
 # Copyright (C) 2014 Novell, Inc.
 #
