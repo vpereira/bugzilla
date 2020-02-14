@@ -3,7 +3,7 @@ env:
     - CC_TEST_REPORTER_ID=6fafabefb822f683bd58458b718f8ddaadcb2acd886b0214a017e4fb6489b243
 language: ruby
 rvm:
-  - 2.4.0
+  - 2.6.5
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y libxml2-dev libmagickcore-dev libmagickwand-dev
