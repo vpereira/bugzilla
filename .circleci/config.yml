@@ -4,13 +4,8 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: default
+    machine: true
     steps:
       - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v && rspec
-      - ruby/bundle-install
-
+      - run: docker build -t bugzilla .
+      - run: docker run -v "$PWD:/root/bugzilla" -ti bugzilla ./entrypoint.sh
