@@ -45,8 +45,8 @@ describe Bugzilla::Bug do
     before do
       allow(@b).to receive(:check_version).and_return([false, '3.4.1'])
       allow(@b).to receive(:comments).and_return('bugs' => { '889526' => { 'comments' => [{ 'creator' => 'vpereira@microfocus.com',
-                                                                           'time' => Time.now, 'bug_id' => 889_526,
-                                                                           'author' => 'vpereira@microfocus.com', 'text' => '' }] } })
+                                                                                            'time' => Time.now, 'bug_id' => 889_526,
+                                                                                            'author' => 'vpereira@microfocus.com', 'text' => '' }] } })
     end
     it 'should not raise error' do
       expect { @b.get_comments(1) }.to_not raise_error
