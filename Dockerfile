@@ -1,6 +1,6 @@
-FROM opensuse/leap:42.3
+FROM opensuse/leap:15.3
 ENV APP_HOME=/root/bugzilla
-RUN zypper install -y libxml2-devel ImageMagick-devel ruby2.4 ruby2.4-devel gcc git automake gdbm-devel libyaml-devel ncurses-devel readline-devel zlib-devel wget curl tar make sqlite3-devel libopenssl-devel
+RUN zypper install -y libxml2-devel ImageMagick-devel ruby2.5 ruby2.5-devel gcc git automake gdbm-devel libyaml-devel ncurses-devel readline-devel zlib-devel wget curl tar make sqlite3-devel libopenssl-devel
 
 RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
